@@ -550,7 +550,7 @@ function db__update(array $data, array $clauses, string $table, $limit = 1, $con
  * a different api call.
  * </p>
  */
-function db__close_connection($conn, array $config = [])
+function db__close_connection($conn = null, array $config = [])
 {
     /*
      * Check if the user provided a database connection for this query,
@@ -560,6 +560,10 @@ function db__close_connection($conn, array $config = [])
         global $app;
 
         $config = $app['configs']['app']['database'];
+    }
+
+    if ($conn === null) {
+        $conn = $app['database'][$config['default']]['connection'];
     }
 
     /*
@@ -641,7 +645,7 @@ function db__open_connection(array $config = [], $return_connection = false)
         return $conn;
     }
 
-    $app['database'][$app['configs']['app']['database']['default']]['connection'] = $conn;
+    $app['database'][$config['default']]['connection'] = $conn;
 }
 
 /**
