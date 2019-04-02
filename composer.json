@@ -1,0 +1,21 @@
+{
+    "name": "mpphp/database",
+    "description": "MPPHP database library",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "tsommie",
+            "email": "anitchec.dev@gmail.com"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "database.php"
+        ]
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.1"
+    }
+}
