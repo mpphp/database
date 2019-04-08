@@ -131,7 +131,7 @@ function db__create(array $data, string $table, $return_insert_id = false, $conn
              * record, return the result from mysqli_insert_id(),  else
              * return a boolean.
              * */
-            $result = $return_insert_id ? db__read($table, [['id', '=', mysqli_insert_id($conn)]]) : mysqli_insert_id($conn);
+            $result = $return_insert_id ? mysqli_insert_id($conn) : db__read($table, [['id', '=', mysqli_insert_id($conn)]]);
 
             break;
         default;
