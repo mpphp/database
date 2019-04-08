@@ -12,6 +12,7 @@
  * The name of the database table that would hold the newly created
  * record.
  * </p>
+ * @param bool $return_insert_id
  * @param bool $return_insert_id <p>
  * For a successful insert query mysqli_query() will return True
  * setting $return_insert_id to true will call mysqli_insert_id()
@@ -32,7 +33,7 @@
  * a different api call.
  * </p>
  *
- * @return bool|int|mysqli_result|string
+ * @return bool|int|mysqli_result|array
  */
 function db__create(array $data, string $table, $return_insert_id = false, $conn = null, array $config = [])
 {
@@ -128,8 +129,9 @@ function db__create(array $data, string $table, $return_insert_id = false, $conn
             /*
              * If the user specified they want the id of the newly inserted
              * record, return the result from mysqli_insert_id(),  else
-             * return a boolean.*/
-            $result = $return_insert_id ? mysqli_insert_id($conn) : $result;
+             * return a boolean.
+             * */
+            $result = $return_insert_id ? db__read($table, [['id', '=', mysqli_insert_id($conn)]]) : mysqli_insert_id($conn);
 
             break;
         default;
